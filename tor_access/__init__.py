@@ -47,7 +47,7 @@ class ACLGroupNode(ACLNode):
         self.name = self.name.replace(os.getcwd(),'')
         self.name = self.name.replace('/','.')
         self.name = self.name[1:].replace('.py','')
-        self.intro = intro or name
+        self.intro = intro or self.name
         self.category = category
         self.handlers = []
 
@@ -125,7 +125,7 @@ def check_access(handler, roleneed):
         return
     
     if not roleneed:
-	raise HTTPError(403)
+        raise HTTPError(403)
 
     checkname = handler.__checkname__
     if handler.__needcheck__.get('url',None):
